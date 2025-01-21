@@ -1,6 +1,8 @@
-import Logo from '../assets/img/logo.webp'
+import Logo from './logo.webp'
 
 import { Link } from 'react-router-dom'
+
+import '../Footer/Footer.scss'
 
 function Footer() {
   return (

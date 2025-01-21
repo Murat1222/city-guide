@@ -1,15 +1,15 @@
 import React from "react";
 
-import SliderImg1 from "../assets/img/image1.webp";
-import SliderImg2 from "../assets/img/image2.webp";
-import SliderImg3 from "../assets/img/image3.webp";
+import SliderImg1 from "./ui/image1.webp";
+import SliderImg2 from "./ui/image2.webp";
+import SliderImg3 from "./ui/image3.webp";
 
-import BlockImg1 from "../assets/img/blockimg1.webp";
-import BlockImg2 from "../assets/img/blockimg2.webp";
-import BlockImg3 from "../assets/img/blockimg3.webp";
+import BlockImg1 from "./ui/blockimg1.webp";
+import BlockImg2 from "./ui/blockimg2.webp";
+import BlockImg3 from "./ui/blockimg3.webp";
 
-import Slider from "../components/Slider.js";
-import "../assets/css/index.scss";
+import Slider from "../../components/Slider/Slider.jsx";
+import "./index.scss";
 
 function Index() {
   const sliderImages = [SliderImg1, SliderImg2, SliderImg3];
