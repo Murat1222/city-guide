@@ -1,13 +1,13 @@
 import './App.scss'
 
-import Header from './components/Header.js'
-import Footer from './components/Footer.js'
+import Footer from './components/Footer/Footer.jsx'
+import Header from './components/Header/Header.jsx'
 
 import { Route, Routes } from 'react-router-dom'
 
-import Index from './pages/Index.js'
-import Attractions from './pages/attractions.js'
-import Contact from './pages/contact.js'
+import Index from './pages/index/Index.js'
+import Attractions from './pages/attractions/attractions.js'
+import Contact from './pages/contact/contact.js'
 
 function App() {
   return (
