@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AttractionCard from '../../components/AttractionCard/AttractionCard';
+import { useAttractionsQuery } from '../../components/Api/useAttractionsQuery';
+import { getLoadingIndicator } from '../../components/Utils/Utils';
 import './attractions.scss';
 
 function Attractions() {
@@ -8,6 +11,13 @@ function Attractions() {
   const [sortBy, setSortBy] = useState(null);
   const [order, setOrder] = useState(null);
 
+  const { data, isLoading, isError } = useAttractionsQuery({
+    page,
+    limit: 10,
+    category: category !== 'all' ? category : undefined,
+    sortBy,
+    order,
+  });
 
   const categories = [
     { name: 'Все', filter: 'all' },
@@ -22,6 +32,8 @@ function Attractions() {
     setPage(1);
   };
 
+  const attractions = Array.isArray(data) ? data : [];
+
   return (
     <div>
       <div className="categories">
@@ -32,7 +44,9 @@ function Attractions() {
           {categories.map((categoryItem, index) => (
             <Link
               key={index}
-              className={`categories__link ${categoryItem.filter === category ? 'categories__link--active' : ''}`}
+              className={`categories__link ${
+                categoryItem.filter === category ? 'categories__link--active' : ''
+              }`}
               onClick={() => handleCategoryChange(categoryItem.filter)}
             >
               {categoryItem.name}
@@ -67,7 +81,16 @@ function Attractions() {
         <div className="container">
           <div className="attractions__text-block">
             <p className="attractions__text">Достопримечательности</p>
+            {isLoading && getLoadingIndicator()}
             <div className="attractions__blocks">
+              {isError && <p>Произошла ошибка при загрузке данных.</p>}
+              {attractions.length > 0 ? (
+                attractions.map((attraction) => (
+                  <AttractionCard key={attraction.id} {...attraction} />
+                ))
+              ) : (
+                !isLoading && !isError && <p>Нет доступных достопримечательностей.</p>
+              )}
             </div>
           </div>
         </div>
