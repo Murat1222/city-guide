@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AttractionCard({
   id,
@@ -10,8 +11,20 @@ function AttractionCard({
   shortTitle,
   image,
 }) {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/attraction/${id}`);
+  };
+
   return (
-    <div className="attractions__block" data-cat={category} id={id}>
+    <div
+      className="attractions__block"
+      data-cat={category}
+      id={id}
+      onClick={handleCardClick}
+      style={{ cursor: 'pointer' }}и
+    >
       <img className="attractions__block-img" src={image} alt={shortTitle} />
       <div className="attractions__block-text">
         <h2 className="attractions__block-title">{title}</h2>
@@ -26,7 +39,7 @@ function AttractionCard({
         </a>
       </div>
     </div>
-  )
+  );
 }
 
-export default AttractionCard
+export default AttractionCard;

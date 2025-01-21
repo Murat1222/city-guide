@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import Index from './pages/index/Index.js'
 import Attractions from './pages/attractions/attractions.js'
 import Contact from './pages/contact/contact.js'
+import AttractionInfo from './pages/attractionsInfo/AttractionsInfo.js'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Index />} />
         <Route path="/contacts" element={<Contact />} />
         <Route path="/attractions" element={<Attractions />} />
+        <Route path="/attraction/:id" element={<AttractionInfo />} />
       </Routes>
       <Footer />
     </div>
