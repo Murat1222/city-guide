@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './AttractionCard.scss'
+
 function AttractionCard({
   id,
   category,
@@ -23,7 +25,6 @@ function AttractionCard({
       data-cat={category}
       id={id}
       onClick={handleCardClick}
-      style={{ cursor: 'pointer' }}и
     >
       <img className="attractions__block-img" src={image} alt={shortTitle} />
       <div className="attractions__block-text">

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import './Slider.scss'
+
 const Slider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
