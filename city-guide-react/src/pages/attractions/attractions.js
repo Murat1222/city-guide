@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AttractionCard from '../../components/AttractionCard/AttractionCard';
 import { useAttractionsQuery } from '../../components/Api/useAttractionsQuery';
 import { getLoadingIndicator } from '../../components/Utils/Utils';
+import SearchComponent from '../../components/Search/Search';
 import './attractions.scss';
 
 function Attractions() {
@@ -10,6 +11,7 @@ function Attractions() {
   const [category, setCategory] = useState('all');
   const [sortBy, setSortBy] = useState(null);
   const [order, setOrder] = useState(null);
+  const [searchTitle, setSearchTitle] = useState('');
 
   const { data, isLoading, isError } = useAttractionsQuery({
     page,
@@ -32,10 +34,19 @@ function Attractions() {
     setPage(1);
   };
 
+  const handleSearch = (title) => {
+    setSearchTitle(title.toLowerCase());
+    setPage(1);
+  };
+
   const attractions = Array.isArray(data) ? data : [];
+  const filteredAttractions = attractions.filter((attraction) =>
+    attraction.title.toLowerCase().includes(searchTitle)
+  );
 
   return (
     <div>
+      <SearchComponent onSearch={handleSearch} />
       <div className="categories">
         <div className="categories__header">
           <p className="categories__title">Категории</p>
@@ -84,8 +95,8 @@ function Attractions() {
             {isLoading && getLoadingIndicator()}
             <div className="attractions__blocks">
               {isError && <p>Произошла ошибка при загрузке данных.</p>}
-              {attractions.length > 0 ? (
-                attractions.map((attraction) => (
+              {filteredAttractions.length > 0 ? (
+                filteredAttractions.map((attraction) => (
                   <AttractionCard key={attraction.id} {...attraction} />
                 ))
               ) : (
