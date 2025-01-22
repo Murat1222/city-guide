@@ -107,7 +107,7 @@ function AttractionInfo() {
           </button>
         </div>
       )}
-      < Reviews/>
+      <Reviews attractionId={id} />
     </div>
   );
 }
