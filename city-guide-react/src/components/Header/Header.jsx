@@ -4,6 +4,8 @@ import '../Header/Header.scss'
 
 import Logo from './logo.webp'
 
+import BurgerMenu from '../Burger/BurgerMenu'
+
 function Header() {
   return (
     <div>
@@ -28,6 +30,7 @@ function Header() {
                 Достопримечательности
               </NavLink>
             </li>
+            <BurgerMenu />
           </nav>
         </div>
       </header>
