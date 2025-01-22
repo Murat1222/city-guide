@@ -4,6 +4,7 @@ import AttractionCard from '../../components/AttractionCard/AttractionCard';
 import { useAttractionsQuery } from '../../components/Api/useAttractionsQuery';
 import { getLoadingIndicator } from '../../components/Utils/Utils';
 import SearchComponent from '../../components/Search/Search';
+import Pagination from '../../components/Pagination/Pagination';
 import './attractions.scss';
 
 function Attractions() {
@@ -13,9 +14,9 @@ function Attractions() {
   const [order, setOrder] = useState(null);
   const [searchTitle, setSearchTitle] = useState('');
 
+  const itemsPerPage = 10;
+
   const { data, isLoading, isError } = useAttractionsQuery({
-    page,
-    limit: 10,
     category: category !== 'all' ? category : undefined,
     sortBy,
     order,
@@ -43,6 +44,12 @@ function Attractions() {
   const filteredAttractions = attractions.filter((attraction) =>
     attraction.title.toLowerCase().includes(searchTitle)
   );
+
+  const totalAttractions = filteredAttractions.length;
+  const totalPages = Math.ceil(totalAttractions / itemsPerPage);
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const currentAttractions = filteredAttractions.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div>
@@ -95,14 +102,19 @@ function Attractions() {
             {isLoading && getLoadingIndicator()}
             <div className="attractions__blocks">
               {isError && <p>Произошла ошибка при загрузке данных.</p>}
-              {filteredAttractions.length > 0 ? (
-                filteredAttractions.map((attraction) => (
+              {currentAttractions.length > 0 ? (
+                currentAttractions.map((attraction) => (
                   <AttractionCard key={attraction.id} {...attraction} />
                 ))
               ) : (
                 !isLoading && !isError && <p>Нет доступных достопримечательностей.</p>
               )}
             </div>
+            <Pagination 
+              page={page} 
+              totalPages={totalPages} 
+              onPageChange={setPage} 
+            />
           </div>
         </div>
       </main>
