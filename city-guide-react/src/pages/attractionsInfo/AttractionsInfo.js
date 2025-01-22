@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { getLoadingIndicator } from '../../components/Utils/Utils';
 import './AttractionsInfo.scss';
 
+import Reviews from '../../components/Reviews/Reviews';
+
 function AttractionInfo() {
   const { id } = useParams();
   const [attraction, setAttraction] = useState(null);
@@ -105,6 +107,7 @@ function AttractionInfo() {
           </button>
         </div>
       )}
+      < Reviews/>
     </div>
   );
 }
